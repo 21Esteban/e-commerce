@@ -12,6 +12,9 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^5.51.21",
+    "@tanstack/vue-query-devtools": "^5.51.21",
+    "admin-shop": "file:",
     "axios": "^1.7.3",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
