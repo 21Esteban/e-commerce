@@ -591,6 +591,10 @@
 </template>
     
 <script setup lang='ts'>
+import { getProductsAction } from '@/modules/productos/actions';
+
+getProductsAction()
+
     
 </script>
     
