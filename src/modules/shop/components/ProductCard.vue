@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '@/modules/productos/interfaces/products.interface';
+import type { Product } from '../../productos/interfaces/products.interface';
 
 
 interface Props{

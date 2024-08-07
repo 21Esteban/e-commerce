@@ -102,26 +102,43 @@
     >
       <ProductCard :products="productos" v-if="productos" />
     </div>
+    <ButtonPagination :hasMoreData="!!productos && productos.length < 10" :page="page" />
   </section>
-  <div></div>
+  
 </template>
 
 <script setup lang="ts">
-import { getProductsAction } from "@/modules/productos/actions";
+import { getProductsAction } from "../../productos/actions/get-products.actions";
 import { useQuery } from "@tanstack/vue-query";
 import ProductCard from "../components/ProductCard.vue";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
+import ButtonPagination from '../../common/components/ButtonPagination.vue';
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+console.log(route , "estos son todas las propiedas de route");
+const page = ref(Number(route.query.page || 1)) 
+console.log(page)
+
 
 //con esto guardamos la primera peticion en cache
 const peticion = useQuery({
-  queryKey: ["products", { page: 1 }],
-  queryFn: () => getProductsAction(),
+  queryKey: ["products", { page: page }],
+  queryFn: () => getProductsAction(page.value),
   staleTime: 1000 * 60,
 });
 
 const productos = computed(() => {
   return peticion.data.value
 });
+
+
+watch(
+  ()=>route.query.page,(newPage)=>{
+    page.value = Number(newPage || 1)
+  }
+)
+
 </script>
 
 <style></style>
